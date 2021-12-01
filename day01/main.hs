@@ -1,20 +1,27 @@
 import System.IO
 import Data.Char
+import Data.List
 
-solve :: Int -> String -> Int
-solve n str = do
-  let ints = map digitToInt str
-  let zipped = zip ints $ rotate n ints
-  sum [val | (val, next) <- zipped, val == next]
+readInt :: String -> Int
+readInt str = read str :: Int
+
+solve1 :: [String] -> Int
+solve1 allLines = do
+  let ints = map readInt allLines
+  let zipped = zip ints (drop 1 ints)
+  sum [1 | (val, next) <- zipped, val < next]
 
 
-rotate :: Int -> [a] -> [a]
-rotate _ [] = []
-rotate n xs = zipWith const (drop n (cycle xs)) xs
+solve2 :: [String] -> Int
+solve2 allLines = do
+  let ints = map readInt allLines
+  let tripples = transpose [ints, (drop 1 ints), (drop 2 ints)]
+  let zipped = zip tripples (drop 1 tripples)
+  sum [1 | (val, next) <- zipped, (sum val) < (sum next)]
 
 main = do
   content <- readFile "input.txt"
-  let firstLine = lines content !! 0
-  print . solve 1 $ firstLine
-  print . solve (length firstLine `div` 2) $ firstLine
+  let allLines = lines content
+  print . solve1 $ allLines
+  print . solve2 $ allLines
 
