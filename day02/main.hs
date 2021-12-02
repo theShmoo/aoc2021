@@ -18,7 +18,7 @@ solve1 xs = do
   let forward = sum [val | (cmd, val) <- xs, cmd == "forward"]
   (down - up) * forward
 
-solve1 :: [(String, Int)] -> Int
+solve2 :: [(String, Int)] -> Int
 solve2 xs = do
   let aim = [if (cmd == "down") then val else if (cmd == "up") then -val else 0 | (cmd, val) <- xs]
   let summed_aims = scanl1 (+) aim
