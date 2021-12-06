@@ -35,3 +35,6 @@ boolToInt False = 0
 
 occur :: Ord a => [a] -> Map.Map a Int
 occur xs = Map.fromListWith (+) ([(x, 1) | x <- xs])
+
+mapInd :: (a -> Int -> b) -> [a] -> [b]
+mapInd f l = zipWith f l [0..]
