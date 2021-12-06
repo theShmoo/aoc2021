@@ -1,6 +1,7 @@
 module Util where
 
 import Data.List
+import qualified Data.Map as Map
 
 splitS :: (String -> Bool) -> String -> [String]
 splitS pred s = case dropWhile pred (init $ tails s) of
@@ -31,3 +32,6 @@ grid x y = replicate y . replicate x
 boolToInt :: Bool -> Int
 boolToInt True  = 1
 boolToInt False = 0
+
+occur :: Ord a => [a] -> Map.Map a Int
+occur xs = Map.fromListWith (+) ([(x, 1) | x <- xs])
