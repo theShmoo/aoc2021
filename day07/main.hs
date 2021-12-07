@@ -1,8 +1,5 @@
 import System.IO
 import Data.List
-
-import qualified Data.Map as Map
-
 import Util
 
 solve1 :: [Int] -> Int
